@@ -1,26 +1,49 @@
-const loadSprite = (file: string, path = 'sprites/') => {
+import groundImg from '../assets/sprites/snow_54.png'
+import groundIceImg from '../assets/sprites/snow_05.png'
+import idle1Img from '../assets/sprites/Idle1.png'
+import idle2Img from '../assets/sprites/Idle3.png'
+import runLeftImg from '../assets/sprites/RunLeft.png'
+import runRightImg from '../assets/sprites/RunRight.png'
+import santaImg from '../assets/sprites/santa3.png'
+import poof1Img from '../assets/sprites/poof1.png'
+import poof2Img from '../assets/sprites/poof2.png'
+import poof3Img from '../assets/sprites/poof3.png'
+import pinkImg from '../assets/sprites/gift_pink.png'
+import orangeImg from '../assets/sprites/gift_orange.png'
+import blueImg from '../assets/sprites/gift_blue.png'
+import coalImg from '../assets/sprites/coal.png'
+import iceImg from '../assets/sprites/IceBox.png'
+import snowballImg from '../assets/sprites/snowball.png'
+import bgImg from '../assets/sprites/BG.png'
+import snowmanImg from '../assets/sprites/SnowMan.png'
+import stoneImg from '../assets/sprites/Stone.png'
+import tree1Img from '../assets/sprites/Tree_1.png'
+import tree2Img from '../assets/sprites/Tree_2.png'
+import iglooImg from '../assets/sprites/Igloo.png'
+
+const loadSprite = (file) => {
   return new Promise<HTMLImageElement>((resolve, reject) => {
     const img = new Image()
     img.onerror = reject
     img.onload = () => resolve(img)
-    img.src = path + file
+    img.src = file
   })
 }
 
 const loadSprites = () => {
   const sprites = [
-    'snow_54.png', 'snow_05.png', 
-    'Idle1.png', 'Idle3.png', 'RunLeft.png', 'RunRight.png', 
-    'santa3.png', 'poof1.png', 'poof2.png', 'poof3.png',
-    'gift_pink.png', 'gift_orange.png', 'gift_blue.png', 'coal.png', 'IceBox.png', 'snowball.png',
-    'BG.png', 'SnowMan.png', 'Stone.png', 'Tree_1.png', 'Tree_2.png', 'Igloo.png'
+    groundImg, groundIceImg, 
+    idle1Img, idle2Img, runLeftImg, runRightImg, 
+    santaImg, poof1Img, poof2Img, poof3Img, 
+    pinkImg, orangeImg, blueImg, coalImg, iceImg, snowballImg, 
+    bgImg, snowmanImg, stoneImg, tree1Img, tree2Img, iglooImg
   ]
   return Promise.all(sprites.map(file => loadSprite(file)))
 }
 
 
 const getSprites = async () => {
-  const [ground, groundIce, idle1, idle2, runLeft, runRight, santa, poof1, poof2, poof3, pink, orange, blue, coalImg, ice, snowball, bg, snowman, stone, tree1, tree2, igloo] = await loadSprites()
+  const [ground, groundIce, idle1, idle2, runLeft, runRight, santa, poof1, poof2, poof3, pink, orange, blue, coal, ice, snowball, bg, snowman, stone, tree1, tree2, igloo] = await loadSprites()
   return {
     ground,
     groundIce,
@@ -31,7 +54,7 @@ const getSprites = async () => {
     presents: {
       blue, orange, pink
     },
-    coalImg,
+    coal,
     poof: [poof1, poof2, poof3],
     ice,
     snowball,

@@ -1,6 +1,6 @@
 <template>
   <p id="score" v-if="state.playing">
-    <img src="sprites/gift_pink.png" width="50" alt="present">
+    <img src="../assets/sprites/gift_pink.png" width="50" alt="present">
     <span>{{state.score}} poeng</span>
   </p>
   <p id="time" v-if="state.playing">

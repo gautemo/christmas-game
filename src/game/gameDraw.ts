@@ -76,7 +76,7 @@ const initCanvas = async (width: number, height: number) => {
     drawVisualElements()
     drawFloor(gameElements.player)
     drawSanta(gameElements.santa)
-    drawGameItems(sprites.coalImg, gameElements.coals)
+    drawGameItems(sprites.coal, gameElements.coals)
     drawGameItems(sprites.ice, gameElements.iceCubes)
     drawGameItems(sprites.snowball, gameElements.snowballs)
     drawGameItems(sprites.presents.blue, gameElements.presents.filter(p => p.color === 'blue'))

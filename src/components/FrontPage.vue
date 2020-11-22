@@ -16,19 +16,19 @@
           <section>
           <h3>Regler:</h3>
           <div class="row">
-            <img src="sprites/gift_pink.png" width="70" alt="present">
+            <img src="../assets/sprites/gift_pink.png" width="70" alt="present">
             <p>Snille barn får gaver (+50 poeng)</p>
           </div>
           <div class="row">
-            <img src="sprites/coal.png" width="70" alt="present">
+            <img src="../assets/sprites/coal.png" width="70" alt="present">
             <p>Slemme barn får kull (-55 poeng)</p>
           </div>
           <div class="row">
-            <img src="sprites/IceBox.png" width="70" alt="present">
+            <img src="../assets/sprites/IceBox.png" width="70" alt="present">
             <p>Har du husket skøytene?</p>
           </div>
           <div class="row">
-            <img src="sprites/snowball.png" width="70" alt="present">
+            <img src="../assets/sprites/snowball.png" width="70" alt="present">
             <p>Liker du å lage snømenn?</p>
           </div>
         </section>
