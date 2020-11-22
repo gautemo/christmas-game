@@ -1,6 +1,6 @@
 <template>
   <p id="score">{{score}} poeng</p>
-  <canvas id="canvas" height="1900" width="4200" 
+  <canvas id="canvas"
     @keydown.left="setMoveLeft(true)" 
     @keyup.left="setMoveLeft(false)" 
     @keydown.right="setMoveRight(true)" 

@@ -1,24 +1,25 @@
-import { getSprites } from './gameAssets'
 import { DropItem, Player, Santa } from './gameClasses';
-import { drawFloor, drawGameItem, drawGameItems, initCanvas, drawVisualElements } from './gameDraw';
+import { initCanvas } from './gameDraw';
 
-let moveLeft = false
-let moveRight = false
+const gameWidth = 4200
+const gameHeight = 1900
+let player: Player
 
 const start = async (updateScore: (score: number) => void) => {
-  const sprites = await getSprites();
-  const [width, height] = initCanvas();
+  const { drawGame } = await initCanvas(gameWidth, gameHeight);
   let score = 0;
+  let ticks = 0;
 
-  const player = new Player(width / 2, height - sprites.ground.height - sprites.playerImg.height, sprites.playerImg.width, sprites.playerImg.height, width)
-  const santa = new Santa(50, sprites.santaImg.width, width)
+  player = new Player(gameWidth / 2, gameHeight, gameWidth)
+  const santa = new Santa(50, gameWidth)
   let dropItems: DropItem[] = []
 
   const tick = () => {
-    player.move(moveLeft, moveRight)
-    const dropItem = santa.tick()
-    if(dropItem){
-      dropItems.push(new DropItem(santa.x, santa.y + 10, sprites.presentImg.width, sprites.presentImg.height, height - sprites.ground.height))
+    ticks++
+    player.move()
+    const santaDroppedItem = santa.tick()
+    if(santaDroppedItem){
+      dropItems.push(new DropItem(santa.x, santa.y + 10, gameHeight))
     }
     const dropItemsToRemove = []
     for(let dropItem of dropItems){
@@ -31,6 +32,12 @@ const start = async (updateScore: (score: number) => void) => {
         if(dropItem.type === 'present'){
           score += 50
         }
+        if(dropItem.type === 'ice'){
+          player.makeIcy()
+        }
+        if(dropItem.type === 'snowball'){
+          player.makeSnowball()
+        }
         updateScore(score)
       }
       if(caught || dropItem.outOfGame()){
@@ -39,18 +46,29 @@ const start = async (updateScore: (score: number) => void) => {
     }
     dropItems = dropItems.filter(item => !dropItemsToRemove.includes(item.id))
 
-    drawVisualElements(width, height)
-    drawFloor(sprites.ground, width, height)
-    drawGameItem(sprites.playerImg, player)
-    drawGameItem(sprites.santaImg, santa)
-    drawGameItems(sprites.presentImg, dropItems.filter(item => item.type === 'present'))
-    drawGameItems(sprites.coalImg, dropItems.filter(item => item.type === 'coal'))
+    drawGame({
+      santa,
+      player,
+      coals: dropItems.filter(item => item.type === 'coal'),
+      iceCubes: dropItems.filter(item => item.type === 'ice'),
+      presents: dropItems.filter(item => item.type === 'present'),
+      snowballs: dropItems.filter(item => item.type === 'snowball'),
+      ticks
+    })
   }
 
   setInterval(tick, 50)
 }
 
-const setMoveLeft = (value: boolean) => moveLeft = value
-const setMoveRight = (value: boolean) => moveRight = value
+const setMoveLeft = (value: boolean) => {
+  if (player) {
+    player.left = value
+  }
+}
+const setMoveRight = (value: boolean) => {
+  if (player) {
+    player.right = value
+  }
+}
 
 export { start, setMoveLeft, setMoveRight }
