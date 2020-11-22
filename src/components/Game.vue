@@ -1,5 +1,8 @@
 <template>
-  <p id="score">{{score}} poeng</p>
+  <p id="score" v-if="state.playing">
+    <img src="sprites/gift_pink.png" width="50" alt="present">
+    <span>{{state.score}} poeng</span>
+  </p>
   <canvas id="canvas"
     @keydown.left="setMoveLeft(true)" 
     @keyup.left="setMoveLeft(false)" 
@@ -10,20 +13,16 @@
 
 <script lang="ts">
 import { onMounted, ref } from 'vue'
-import { start, setMoveLeft, setMoveRight } from '../game/gameControl'
+import { init, setMoveLeft, setMoveRight } from '../game/gameControl'
+import { state } from '../composable/gameReactive';
 
 export default {
   setup(){
-    const score = ref(0)
-    const updateScore = (value: number) => {
-      score.value = value
-    }
-
     onMounted(async () => {
-      start(updateScore)
+      init()
     })
 
-    return { setMoveLeft, setMoveRight, score }
+    return { setMoveLeft, setMoveRight, state }
   }
 }
 </script>
@@ -38,5 +37,16 @@ export default {
   position: absolute;
   top: 15px;
   right: 15px;
+  background: #c24537;
+  color: whitesmoke;
+  font-weight: bold;
+  border-radius: 100px;
+  padding: 10px 20px 10px 30px;
+}
+
+#score img{
+  position: absolute;
+  left: -20px;
+  top: -10px;
 }
 </style>

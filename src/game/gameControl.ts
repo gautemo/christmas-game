@@ -1,18 +1,21 @@
 import { DropItem, Player, Santa } from './gameClasses';
 import { initCanvas } from './gameDraw';
+import { started, updateScore } from '../composable/gameReactive';
 
 const gameWidth = 4200
 const gameHeight = 1900
 let player: Player
+let santa: Santa
+let dropItems: DropItem[] = []
+let score = 0;
+let ticks = 0;
 
-const start = async (updateScore: (score: number) => void) => {
+const init = async () => {
   const { drawGame } = await initCanvas(gameWidth, gameHeight);
-  let score = 0;
-  let ticks = 0;
-
   player = new Player(gameWidth / 2, gameHeight, gameWidth)
-  const santa = new Santa(50, gameWidth)
-  let dropItems: DropItem[] = []
+  santa = new Santa(50, gameWidth)
+  santa.appearTime = santa.minimumAppearTime
+  santa.appearTimeLeft = santa.minimumAppearTime
 
   const tick = () => {
     ticks++
@@ -60,6 +63,18 @@ const start = async (updateScore: (score: number) => void) => {
   setInterval(tick, 50)
 }
 
+const start = () => {
+  score = 0;
+  updateScore(score)
+  ticks = 0;
+
+  player = new Player(gameWidth / 2, gameHeight, gameWidth)
+  santa = new Santa(50, gameWidth)
+  dropItems = []
+
+  started()
+}
+
 const setMoveLeft = (value: boolean) => {
   if (player) {
     player.left = value
@@ -71,4 +86,4 @@ const setMoveRight = (value: boolean) => {
   }
 }
 
-export { start, setMoveLeft, setMoveRight }
+export { init, start, setMoveLeft, setMoveRight }

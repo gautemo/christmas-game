@@ -80,8 +80,8 @@ class Player extends GameItem{
 class Santa extends GameItem{
   static width = 225;
   gameWidth: number;
-  appearTime = 50
-  appearTimeLeft = 10
+  appearTime: number;
+  appearTimeLeft: number;
   minimumAppearTime = 20
   poofTime = 9
 
@@ -89,6 +89,8 @@ class Santa extends GameItem{
     super(0, y);
     this.gameWidth = gameWidth;
     this.randomMove()
+    this.appearTime = 50
+    this.appearTimeLeft = 10
   }
 
   randomMove() {
