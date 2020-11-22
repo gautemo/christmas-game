@@ -16,15 +16,17 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
-firebase.auth().signInAnonymously()
 
-const getCurrentUser = () => {
+const signInAnonymously = () => {
   return new Promise((resolve, reject) => {
-    const unsubscribe = firebase.auth().onAuthStateChanged(user => {
-      unsubscribe();
-      resolve(user);
-    }, reject);
+    firebase.auth().signInAnonymously()
+      .then((user) => {
+        resolve(user)
+      })
+      .catch((error) => {
+        reject(error)
+      })
   })
 };
 
-export { firebase, getCurrentUser }
+export { firebase, signInAnonymously }
