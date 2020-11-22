@@ -16,6 +16,7 @@ const started = () => {
 const finished = () => {
   state.playing = false
   state.finalScore = state.score
+  console.log(state.finalScore)
 }
 
 const updateScore = (newScore: number) => {

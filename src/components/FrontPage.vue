@@ -8,7 +8,7 @@
           <HighScore/>
         </template>
         <template #fallback>
-          <p>Laster highscores</p>
+          <p>Laster leaderboard </p>
         </template>
       </Suspense>
       <details>
@@ -85,7 +85,6 @@ export default {
 }
 
 button{
-  cursor: pointer;
   background: radial-gradient(#a61715 30%, #c24537);
   border: none;
   border-radius: 15px;

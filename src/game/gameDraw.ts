@@ -19,11 +19,6 @@ const initCanvas = async (width: number, height: number) => {
 
   const drawVisualElements = () => {
     ctx.clearRect(0, 0, width, height)
-    // const gradient = ctx.createLinearGradient(0, 0, 0, height);
-    // gradient.addColorStop(0, '#101936');
-    // gradient.addColorStop(1, '#7ba7df');
-    // ctx.fillStyle = gradient
-    // ctx.fillRect(0, 0, width, height)
     ctx.drawImage(sprites.bg, 0, 0, width, height)
     ctx.drawImage(sprites.tree1, width - 400, height - GroundHeight + 1 - sprites.tree1.height)
     ctx.drawImage(sprites.igloo, width - 50 - sprites.igloo.width, height - GroundHeight + 1 - sprites.igloo.height)
@@ -88,6 +83,8 @@ const initCanvas = async (width: number, height: number) => {
     drawGameItems(sprites.presents.orange, gameElements.presents.filter(p => p.color === 'orange'))
     drawGameItems(sprites.presents.pink, gameElements.presents.filter(p => p.color === 'pink'))
     drawPlayer(gameElements.player, gameElements.ticks)
+    // ctx.fillStyle = 'rgba(0, 0, 0, 0.8)'
+    // ctx.fillRect(0, 0, width, height)
   }
 
   return { drawGame }

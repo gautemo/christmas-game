@@ -9,6 +9,8 @@ html,body, #app{
   font-family: 'Texturina', serif;
 }
 
-button{
+button, input{
   font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
 }

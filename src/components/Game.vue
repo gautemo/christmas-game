@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch, watchEffect } from 'vue'
 import { init, setMoveLeft, setMoveRight } from '../game/gameControl'
 import { state } from '../composable/gameReactive';
 
@@ -23,6 +23,12 @@ export default {
   setup(){
     onMounted(async () => {
       init()
+    })
+
+    watchEffect(() => {
+      if(state.playing){
+        document.querySelector('#canvas').focus();
+      }
     })
 
     return { setMoveLeft, setMoveRight, state }
