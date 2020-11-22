@@ -138,4 +138,10 @@ summary{
   font-size: 1.5em;
   margin: 0 0 0 20px;
 }
+
+@media only screen and (max-width: 1000px) {
+  .container{
+    margin: 5vh 10vw;
+  }
+}
 </style>

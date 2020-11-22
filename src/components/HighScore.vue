@@ -62,9 +62,15 @@ export default {
 <style scoped>
 label{
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 10px;
   font-size: 1.5em;
+  margin: 10px 0;
+}
+
+label p{
+  margin: 0;
 }
 
 section{

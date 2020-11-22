@@ -12,6 +12,8 @@
     @keydown.right="setMoveRight(true)" 
     @keyup.right="setMoveRight(false)" 
     tabindex="0"></canvas>
+  <button id="left" @touchstart="setMoveLeft(true)" @touchend="setMoveLeft(false)"></button>
+  <button id="right" @touchstart="setMoveRight(true)" @touchend="setMoveRight(false)"></button>
 </template>
 
 <script lang="ts">
@@ -68,5 +70,31 @@ export default {
   font-weight: bold;
   border-radius: 100px;
   padding: 10px 20px;
+}
+
+#left{
+  position: absolute;
+  left: 5px;
+  bottom: 5px;
+  background: #c24537;
+  height: 40px;
+  width: 60px;
+  clip-path: polygon(40% 0%, 40% 20%, 100% 20%, 100% 80%, 40% 80%, 40% 100%, 0% 50%);
+}
+
+#right{
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  background: #c24537;
+  height: 40px;
+  width: 60px;
+  clip-path: polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%);
+}
+
+@media only screen and (min-width: 1200px) {
+  #right, #left{
+    display: none;
+  }
 }
 </style>
