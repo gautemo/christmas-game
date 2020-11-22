@@ -89,7 +89,7 @@ class Santa extends GameItem{
     super(0, y);
     this.gameWidth = gameWidth;
     this.randomMove()
-    this.appearTime = 50
+    this.appearTime = 40
     this.appearTimeLeft = 10
   }
 

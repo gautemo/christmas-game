@@ -1,6 +1,6 @@
 import { DropItem, Player, Santa } from './gameClasses';
 import { initCanvas } from './gameDraw';
-import { started, updateScore } from '../composable/gameReactive';
+import { finished, started, updateScore, updateTime } from '../composable/gameReactive';
 
 const gameWidth = 4200
 const gameHeight = 1900
@@ -8,7 +8,7 @@ let player: Player
 let santa: Santa
 let dropItems: DropItem[] = []
 let score = 0;
-let ticks = 0;
+let ticksLeft = 0;
 
 const init = async () => {
   const { drawGame } = await initCanvas(gameWidth, gameHeight);
@@ -18,7 +18,8 @@ const init = async () => {
   santa.appearTimeLeft = santa.minimumAppearTime
 
   const tick = () => {
-    ticks++
+    ticksLeft--
+    updateTime(Math.ceil((ticksLeft * 50)/1000))
     player.move()
     const santaDroppedItem = santa.tick()
     if(santaDroppedItem){
@@ -56,8 +57,12 @@ const init = async () => {
       iceCubes: dropItems.filter(item => item.type === 'ice'),
       presents: dropItems.filter(item => item.type === 'present'),
       snowballs: dropItems.filter(item => item.type === 'snowball'),
-      ticks
+      ticks: ticksLeft
     })
+
+    if (ticksLeft === 0) {
+      finished()
+    }
   }
 
   setInterval(tick, 50)
@@ -65,8 +70,8 @@ const init = async () => {
 
 const start = () => {
   score = 0;
-  updateScore(score)
-  ticks = 0;
+  ticksLeft = 1200;
+  updateTime(Math.ceil((ticksLeft * 50) / 1000))
 
   player = new Player(gameWidth / 2, gameHeight, gameWidth)
   santa = new Santa(50, gameWidth)

@@ -3,6 +3,14 @@
     <main>
       <h1>Er det noen snille barn her?</h1>
       <button @click="start">Start</button>
+       <Suspense>
+        <template #default>
+          <HighScore/>
+        </template>
+        <template #fallback>
+          <p>Laster highscores</p>
+        </template>
+      </Suspense>
       <details>
         <summary><h2>Om spillet</h2></summary>
           <section>
@@ -49,10 +57,12 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { start } from '../game/gameControl'
+import HighScore from './HighScore.vue'
 
 export default {
+  components: { HighScore },
   setup(){
     return { start }
   }
@@ -73,8 +83,6 @@ export default {
   border-radius: 25px;
   padding: 20px;
 }
-
-
 
 button{
   cursor: pointer;

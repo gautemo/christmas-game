@@ -3,6 +3,9 @@
     <img src="sprites/gift_pink.png" width="50" alt="present">
     <span>{{state.score}} poeng</span>
   </p>
+  <p id="time" v-if="state.playing">
+    <span>{{state.timeLeft}}s</span>
+  </p>
   <canvas id="canvas"
     @keydown.left="setMoveLeft(true)" 
     @keyup.left="setMoveLeft(false)" 
@@ -48,5 +51,16 @@ export default {
   position: absolute;
   left: -20px;
   top: -10px;
+}
+
+#time{
+  position: absolute;
+  top: 70px;
+  right: 15px;
+  background: #c24537;
+  color: whitesmoke;
+  font-weight: bold;
+  border-radius: 100px;
+  padding: 10px 20px;
 }
 </style>
