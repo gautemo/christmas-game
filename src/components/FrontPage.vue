@@ -4,11 +4,17 @@
       <h1>Er det noen {{nightmode ? 'slemme' : 'snille'}} barn her?</h1>
       <button @click="start">Start</button>
       <div class="settings">
-        <label id="nightmode-toggle">
+        <label class="toggle nightmode">
           <input type="checkbox" v-model="nightmode">
           <div class="ball"></div>
           <span>👿</span>
           <span>😇</span>
+        </label>
+        <label class="toggle music" :class="{checked: sound.music}">
+          <input type="checkbox" v-model="sound.music">
+          <div class="ball"></div>
+          <span>🎵</span>
+          <span>🤫</span>
         </label>
       </div>
        <Suspense>
@@ -47,21 +53,7 @@
           </p>
         </section>
         <section>
-          <h3>Kreditering:</h3>
-          <p>
-            Grafikk er hentet fra 
-            <ul>
-              <li><a href="https://www.gameart2d.com/freebies.html" target="_blank" rel="noopener">Game Art 2D</a></li>
-              <li><a href="https://opengameart.org/content/2d-platformer-snow-pack" target="_blank" rel="noopener">Tio Aimar @ opengameart.org</a></li>
-              <li><a href="https://opengameart.org/content/poof-effect-spritesheet" target="_blank" rel="noopener">opengameart.org/content/poof-effect-spritesheet</a></li>
-              <li><a href="https://opengameart.org/content/sweets-and-gifts" target="_blank" rel="noopener">opengameart.org/content/sweets-and-gifts</a></li>
-              <li><a href='https://webstockreview.net/image/snowball-clipart/18900.html?no1' target="_blank" rel="noopener">https://webstockreview.net</a>,</li>
-              <li><a href="https://www.jing.fm/iclip/ihTobR_bag-of-coal-clipart-2-by-angela-cartoon/" target="_blank" rel="noopener">jing.fm/iclip/ihTobR_bag-of-coal-clipart-2-by-angela-cartoon/</a></li>
-              <li><a href="https://www.pikpng.com/pngvi/Tibwox_santa-claus-png-cute-santa-claus-clipart-transparent/" target="_blank" rel="noopener">Santa Claus Png - Cute Santa Claus Clipart Transparent Png @pikpng.com</a></li>
-              <li><a href="https://www.pikpng.com/pngvi/iJihJTx_client-payday-2-santa-mask-clipart/" target="_blank" rel="noopener">Client - Payday 2 Santa Mask Clipart @pikpng.com</a></li>
-              <li><a href="https://opengameart.org/content/thief-boy-game-character-sprites" target="_blank" rel="noopener">opengameart.org/content/thief-boy-game-character-sprites</a></li>
-            </ul>
-          </p>
+          <Credits/>
         </section>
       </details>
     </main>
@@ -71,12 +63,14 @@
 <script lang="ts">
 import { start } from '../game/gameControl'
 import HighScore from './HighScore.vue'
+import Credits from './Credits.vue'
 import { nightmode } from '../composable/gameReactive'
+import { sound } from '../composable/soundReactive'
 
 export default {
-  components: { HighScore },
+  components: { HighScore, Credits },
   setup(){
-    return { start, nightmode }
+    return { start, nightmode, sound }
   }
 }
 </script>
@@ -155,11 +149,11 @@ summary{
 .settings{
   margin: 15px 0 5px 0;
   display: flex;
+  gap: 30px;
   justify-content: space-around;
 }
 
-#nightmode-toggle{
-  background: var(--toggle-color, rgb(232 102 130));
+.toggle{
   border-radius: 100px;
   cursor: pointer;
   display: flex;
@@ -171,9 +165,18 @@ summary{
   width: 75px;
   box-sizing: border-box;
   transition: all 0.2s linear;
+  background: #eea551;
 }
 
-#nightmode-toggle span{
+.toggle.checked{
+  background: #0891ae;
+}
+
+.toggle.nightmode{
+  background: var(--toggle-color, rgb(232 102 130));
+}
+
+.toggle span{
   font-size: 1.2em;
   margin: 0 2px 2px 2px;
 }
@@ -190,7 +193,7 @@ summary{
   transition: all 0.2s linear;
 }
 
-#nightmode-toggle input{
+.toggle input{
   opacity: 0;
   position: absolute;
 }
