@@ -1,3 +1,5 @@
+import { nightmode } from '../composable/gameReactive';
+
 const random = (max: number) => Math.floor(Math.random() * Math.floor(max));
 
 const GroundHeight = 128;
@@ -122,25 +124,49 @@ class DropItem extends GameItem{
     this.groundY = gameHeight - GroundHeight
     this.id = Date.now();
     const randomType = random(100)
-    if (randomType <= 15){
-      this.type = 'coal'
-      this.speed = 15
-    }else if(randomType <= 25){
-      this.type = 'ice'
-      this.speed = 12
-    }else if(randomType <= 35){
-      this.type = 'snowball'
-      this.speed = 16
+    if(nightmode.value){
+      if (randomType <= 15) {
+        this.type = 'present'
+        this.speed = 15
+        const randomColor = random(3)
+        if (randomColor === 0) {
+          this.color = 'pink'
+        } else if (randomColor === 1) {
+          this.color = 'blue'
+        } else {
+          this.color = 'orange'
+        }
+      } else if (randomType <= 25) {
+        this.type = 'ice'
+        this.speed = 12
+      } else if (randomType <= 35) {
+        this.type = 'snowball'
+        this.speed = 16
+      } else {
+        this.type = 'coal'
+        this.speed = 10
+      }
     }else{
-      this.type = 'present'
-      this.speed = 10
-      const randomColor = random(3)
-      if(randomColor === 0){
-        this.color = 'pink'
-      }else if(randomColor === 1){
-        this.color = 'blue'
+      if (randomType <= 15){
+        this.type = 'coal'
+        this.speed = 15
+      }else if(randomType <= 25){
+        this.type = 'ice'
+        this.speed = 12
+      }else if(randomType <= 35){
+        this.type = 'snowball'
+        this.speed = 16
       }else{
-        this.color = 'orange'
+        this.type = 'present'
+        this.speed = 10
+        const randomColor = random(3)
+        if(randomColor === 0){
+          this.color = 'pink'
+        }else if(randomColor === 1){
+          this.color = 'blue'
+        }else{
+          this.color = 'orange'
+        }
       }
     }
   }

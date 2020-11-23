@@ -1,4 +1,4 @@
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 const state = reactive({
   playing: false,
   score: 0,
@@ -6,6 +6,8 @@ const state = reactive({
   timeLeft: 0,
   name: ''
 })
+
+const nightmode = ref(false);
 
 const started = () => {
   state.playing = true
@@ -27,4 +29,4 @@ const updateTime = (timeLeft: number) => {
   state.timeLeft = timeLeft
 }
 
-export { started, finished, updateScore, updateTime, state }
+export { started, finished, updateScore, updateTime, state, nightmode }

@@ -1,6 +1,6 @@
 import { DropItem, Player, Santa } from './gameClasses';
 import { initCanvas } from './gameDraw';
-import { finished, started, updateScore, updateTime } from '../composable/gameReactive';
+import { finished, nightmode, started, updateScore, updateTime } from '../composable/gameReactive';
 
 const gameWidth = 4200
 const gameHeight = 1900
@@ -23,7 +23,7 @@ const init = async () => {
     player.move()
     const santaDroppedItem = santa.tick()
     if(santaDroppedItem){
-      dropItems.push(new DropItem(santa.x, santa.y + 10, gameHeight))
+      dropItems.push(new DropItem(santa.x, santa.y + 150, gameHeight))
     }
     const dropItemsToRemove = []
     for(let dropItem of dropItems){
@@ -31,10 +31,18 @@ const init = async () => {
       const caught = player.collision(dropItem)
       if(caught){
         if(dropItem.type === 'coal'){
-          score = Math.max(0, score - 55)
+          if(nightmode.value){
+            score += 50
+          }else{
+            score = Math.max(0, score - 55)
+          }
         }
         if(dropItem.type === 'present'){
-          score += 50
+          if (nightmode.value) {
+            score = Math.max(0, score - 55)
+          } else {
+            score += 50
+          }
         }
         if(dropItem.type === 'ice'){
           player.makeIcy()

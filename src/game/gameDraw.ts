@@ -1,3 +1,4 @@
+import { nightmode } from '../composable/gameReactive'
 import { getSprites } from './gameAssets'
 import { DropItem, GameItem, GroundHeight, Player, Santa } from './gameClasses'
 
@@ -55,7 +56,7 @@ const initCanvas = async (width: number, height: number) => {
     } else if (santa.appearTimeLeft < 3) {
       ctx.drawImage(sprites.poof[1], santa.x, santa.y)
     } else {
-      ctx.drawImage(sprites.santa, santa.x, santa.y)
+      ctx.drawImage(nightmode.value ? sprites.santaBad : sprites.santa, santa.x, santa.y)
     }
   }
 
@@ -63,12 +64,16 @@ const initCanvas = async (width: number, height: number) => {
     if(player.isSnowball()){
       ctx.drawImage(sprites.snowman, player.x, player.y + 1, Player.width, Player.height)
     }else if(player.movesLeft()){
-      drawGameItem(sprites.player.runLeft, player)
+      drawGameItem(nightmode.value ? sprites.player.badLeft : sprites.player.runLeft, player)
     }else if(player.movesRight()){
-      drawGameItem(sprites.player.runRight, player)
+      drawGameItem(nightmode.value ? sprites.player.badRight : sprites.player.runRight, player)
     }else{
       const animationStance = Math.ceil(ticks / 10) % 2 === 0
-      drawGameItem(animationStance ? sprites.player.idle1 : sprites.player.idle2, player)
+      if(nightmode.value){
+        drawGameItem(animationStance ? sprites.player.badIdle1 : sprites.player.badIdle2, player)
+      }else{
+        drawGameItem(animationStance ? sprites.player.idle1 : sprites.player.idle2, player)
+      }
     }
   }
 
@@ -83,8 +88,10 @@ const initCanvas = async (width: number, height: number) => {
     drawGameItems(sprites.presents.orange, gameElements.presents.filter(p => p.color === 'orange'))
     drawGameItems(sprites.presents.pink, gameElements.presents.filter(p => p.color === 'pink'))
     drawPlayer(gameElements.player, gameElements.ticks)
-    // ctx.fillStyle = 'rgba(0, 0, 0, 0.8)'
-    // ctx.fillRect(0, 0, width, height)
+    if(nightmode.value){
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.4)'
+      ctx.fillRect(0, 0, width, height)
+    }
   }
 
   return { drawGame }

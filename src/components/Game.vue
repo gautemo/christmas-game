@@ -1,9 +1,10 @@
 <template>
-  <p id="score" v-if="state.playing">
-    <img src="../assets/sprites/gift_pink.png" width="50" alt="present">
+  <p id="score" v-if="state.playing" :class="{night: nightmode}">
+    <img v-if="!nightmode" src="../assets/sprites/gift_pink.png" width="50" alt="present">
+    <img v-else src="../assets/sprites/coal.png" width="50" alt="present">
     <span>{{state.score}} poeng</span>
   </p>
-  <p id="time" v-if="state.playing">
+  <p id="time" v-if="state.playing" :class="{night: nightmode}">
     <span>{{state.timeLeft}}s</span>
   </p>
   <canvas id="canvas"
@@ -19,7 +20,7 @@
 <script lang="ts">
 import { onMounted, ref, watch, watchEffect } from 'vue'
 import { init, setMoveLeft, setMoveRight } from '../game/gameControl'
-import { state } from '../composable/gameReactive';
+import { state, nightmode } from '../composable/gameReactive';
 
 export default {
   setup(){
@@ -33,7 +34,7 @@ export default {
       }
     })
 
-    return { setMoveLeft, setMoveRight, state }
+    return { setMoveLeft, setMoveRight, state, nightmode }
   }
 }
 </script>
@@ -70,6 +71,11 @@ export default {
   font-weight: bold;
   border-radius: 100px;
   padding: 10px 20px;
+}
+
+#time.night,
+#score.night{
+  background: #a61715cb;
 }
 
 #left, #right{

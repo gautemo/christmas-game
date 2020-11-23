@@ -2,9 +2,14 @@ import groundImg from '../assets/sprites/snow_54.png'
 import groundIceImg from '../assets/sprites/snow_05.png'
 import idle1Img from '../assets/sprites/Idle1.png'
 import idle2Img from '../assets/sprites/Idle3.png'
+import badIdle1Img from '../assets/sprites/bad_idle1.png'
+import badIdle2Img from '../assets/sprites/bad_idle2.png'
+import badLeftImg from '../assets/sprites/bad_left.png'
+import badRightImg from '../assets/sprites/bad_right.png'
 import runLeftImg from '../assets/sprites/RunLeft.png'
 import runRightImg from '../assets/sprites/RunRight.png'
 import santaImg from '../assets/sprites/santa.png'
+import santaBadImg from '../assets/sprites/santa_evil.png'
 import poof1Img from '../assets/sprites/poof1.png'
 import poof2Img from '../assets/sprites/poof2.png'
 import poof3Img from '../assets/sprites/poof3.png'
@@ -34,7 +39,8 @@ const loadSprites = () => {
   const sprites = [
     groundImg, groundIceImg, 
     idle1Img, idle2Img, runLeftImg, runRightImg, 
-    santaImg, poof1Img, poof2Img, poof3Img, 
+    badIdle1Img, badIdle2Img, badLeftImg, badRightImg,
+    santaImg, poof1Img, poof2Img, poof3Img, santaBadImg, 
     pinkImg, orangeImg, blueImg, coalImg, iceImg, snowballImg, 
     bgImg, snowmanImg, stoneImg, tree1Img, tree2Img, iglooImg
   ]
@@ -43,14 +49,15 @@ const loadSprites = () => {
 
 
 const getSprites = async () => {
-  const [ground, groundIce, idle1, idle2, runLeft, runRight, santa, poof1, poof2, poof3, pink, orange, blue, coal, ice, snowball, bg, snowman, stone, tree1, tree2, igloo] = await loadSprites()
+  const [ground, groundIce, idle1, idle2, runLeft, runRight, badIdle1, badIdle2, badLeft, badRight, santa, poof1, poof2, poof3, santaBad, pink, orange, blue, coal, ice, snowball, bg, snowman, stone, tree1, tree2, igloo] = await loadSprites()
   return {
     ground,
     groundIce,
     player: {
-      idle1, idle2, runLeft, runRight
+      idle1, idle2, runLeft, runRight, badIdle1, badIdle2, badLeft, badRight
     },
     santa,
+    santaBad,
     presents: {
       blue, orange, pink
     },
