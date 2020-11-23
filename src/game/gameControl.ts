@@ -1,6 +1,7 @@
 import { DropItem, Player, Santa } from './gameClasses';
 import { initCanvas } from './gameDraw';
 import { finished, nightmode, started, updateScore, updateTime } from '../composable/gameReactive';
+import { playFreeze, playHurt, playPoints, playSnow } from '../utils/soundEffects';
 
 const gameWidth = 4200
 const gameHeight = 1900
@@ -33,22 +34,28 @@ const init = async () => {
         if(dropItem.type === 'coal'){
           if(nightmode.value){
             score += 50
+            playPoints()
           }else{
             score = Math.max(0, score - 55)
+            playHurt()
           }
         }
         if(dropItem.type === 'present'){
           if (nightmode.value) {
             score = Math.max(0, score - 55)
+            playHurt()
           } else {
             score += 50
+            playPoints()
           }
         }
         if(dropItem.type === 'ice'){
           player.makeIcy()
+          playFreeze()
         }
         if(dropItem.type === 'snowball'){
           player.makeSnowball()
+          playSnow()
         }
         updateScore(score)
       }

@@ -4,18 +4,33 @@
       <h1>Er det noen {{nightmode ? 'slemme' : 'snille'}} barn her?</h1>
       <button @click="start">Start</button>
       <div class="settings">
-        <label class="toggle nightmode">
-          <input type="checkbox" v-model="nightmode">
-          <div class="ball"></div>
-          <span>👿</span>
-          <span>😇</span>
-        </label>
-        <label class="toggle music" :class="{checked: sound.music}">
-          <input type="checkbox" v-model="sound.music">
-          <div class="ball"></div>
-          <span>🎵</span>
-          <span>🤫</span>
-        </label>
+        <section>
+          <label for="nightmode">Nightmode</label>
+          <label class="toggle nightmode">
+            <input type="checkbox" v-model="nightmode" id="nightmode">
+            <div class="ball"></div>
+            <span>👿</span>
+            <span>😇</span>
+          </label>
+        </section>
+        <section>
+          <label for="music">Musikk</label>
+          <label class="toggle" :class="{checked: sound.music}">
+            <input type="checkbox" v-model="sound.music" id="music">
+            <div class="ball"></div>
+            <span>🎵</span>
+            <span>🤫</span>
+          </label>
+        </section>
+        <section>
+          <label for="soundeffects">Lydeffekter</label>
+          <label class="toggle" :class="{checked: sound.soundEffects}">
+            <input type="checkbox" v-model="sound.soundEffects" id="soundeffects">
+            <div class="ball"></div>
+            <span>🔊</span>
+            <span>🔈</span>
+          </label>  
+        </section>      
       </div>
        <Suspense>
         <template #default>
@@ -153,6 +168,13 @@ summary{
   justify-content: space-around;
 }
 
+.settings section{
+  display: flex;
+  gap: 10px;
+  font-size: 1.2em;
+  align-items: center;
+}
+
 .toggle{
   border-radius: 100px;
   cursor: pointer;
@@ -177,12 +199,16 @@ summary{
 }
 
 .toggle span{
-  font-size: 1.2em;
+  font-size: 1.2rem;
   margin: 0 2px 2px 2px;
 }
 
-.ball{
+.nightmode .ball{
   background: var(--toggle-ball, rgb(250, 250, 250));
+}
+
+.ball{
+  background: rgb(250, 250, 250);
   border-radius: 50%;
   position: absolute;
   top: 3px;
