@@ -49,6 +49,7 @@
               <li><a href="https://opengameart.org/content/sweets-and-gifts" target="_blank" rel="noopener">opengameart.org/content/sweets-and-gifts</a></li>
               <li><a href='https://webstockreview.net/image/snowball-clipart/18900.html?no1' target="_blank" rel="noopener">https://webstockreview.net</a>,</li>
               <li><a href="https://www.jing.fm/iclip/ihTobR_bag-of-coal-clipart-2-by-angela-cartoon/" target="_blank" rel="noopener">jing.fm/iclip/ihTobR_bag-of-coal-clipart-2-by-angela-cartoon/</a></li>
+              <li><a href="https://www.pikpng.com/pngvi/Tibwox_santa-claus-png-cute-santa-claus-clipart-transparent/" target="_blank" rel="noopener">Santa Claus Png - Cute Santa Claus Clipart Transparent Png @pikpng.com</a></li>
             </ul>
           </p>
         </section>
