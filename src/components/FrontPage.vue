@@ -228,6 +228,10 @@ input[type="checkbox"]:checked + .ball{
   transform: translateX(37px);
 }
 
+input[type="checkbox"]:focus + .ball{
+  outline: 1px solid #333;
+}
+
 .night{
   --toggle-color: #333;
   --toggle-ball: #999;
