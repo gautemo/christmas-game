@@ -1,4 +1,5 @@
 import { reactive, ref } from 'vue'
+import { logEvent } from '../firebase/firebase';
 const state = reactive({
   playing: false,
   score: 0,
@@ -13,12 +14,13 @@ const started = () => {
   state.playing = true
   state.finalScore = 0
   state.score = 0
+  logEvent('start')
 }
 
 const finished = () => {
   state.playing = false
   state.finalScore = state.score
-  console.log(state.finalScore)
+  logEvent('finished')
 }
 
 const updateScore = (newScore: number) => {

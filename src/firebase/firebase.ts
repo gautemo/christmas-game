@@ -29,4 +29,8 @@ const signInAnonymously = () => {
   })
 };
 
-export { firebase, signInAnonymously }
+const logEvent = (name: string) => {
+  firebase.analytics().logEvent(name);
+}
+
+export { firebase, signInAnonymously, logEvent }

@@ -84,8 +84,8 @@ class Santa extends GameItem{
   gameWidth: number;
   appearTime: number;
   appearTimeLeft: number;
-  minimumAppearTime = 20
-  poofTime = 9
+  minimumAppearTime = 16
+  poofTime = 7
 
   constructor(y: number, gameWidth: number) {
     super(0, y);

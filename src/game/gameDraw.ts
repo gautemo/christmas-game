@@ -47,11 +47,11 @@ const initCanvas = async (width: number, height: number) => {
   }
 
   const drawSanta = (santa: Santa) => {
-    if (santa.appearTimeLeft > santa.appearTime - 3) {
+    if (santa.appearTimeLeft > santa.appearTime - 2) {
       ctx.drawImage(sprites.poof[0], santa.x, santa.y)
-    } else if (santa.appearTimeLeft > santa.appearTime - 6) {
+    } else if (santa.appearTimeLeft > santa.appearTime - 4) {
       ctx.drawImage(sprites.poof[1], santa.x, santa.y)
-    } else if (santa.appearTimeLeft > santa.appearTime - 9) {
+    } else if (santa.appearTimeLeft > santa.appearTime - 7) {
       ctx.drawImage(sprites.poof[2], santa.x, santa.y)
     } else if (santa.appearTimeLeft < 3) {
       ctx.drawImage(sprites.poof[1], santa.x, santa.y)
