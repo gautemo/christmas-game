@@ -1,7 +1,7 @@
 <template>
   <label v-if="state.finalScore > 0">
     <p>Ny score:</p>
-    <input type="text" v-model="state.name" v-if="state.finalScore > lowestScore" maxlength="30" :class="{required: requiredDisplay}">
+    <input type="text" v-model="state.name" v-if="state.finalScore > lowestScore" maxlength="30" :class="{required: requiredDisplay}" @keydown.enter="addScoreClicked">
     <p>{{state.finalScore}} poeng</p>
     <button @click="addScoreClicked" v-if="state.finalScore > lowestScore">Send inn</button>
   </label>
