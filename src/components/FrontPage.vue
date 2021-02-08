@@ -63,9 +63,7 @@
         </section>
         <section>
           <h3>Skaperen:</h3>
-          <p>
-            ?
-          </p>
+          <created-by-me></created-by-me>
         </section>
         <section>
           <Credits/>
